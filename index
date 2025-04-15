@@ -12,6 +12,15 @@
     h1 {
       text-align: center;
     }
+    .student-field {
+      margin: 20px 0;
+      text-align: center;
+    }
+    .student-field input {
+      padding: 10px;
+      font-size: 16px;
+      width: 300px;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
@@ -40,6 +49,10 @@
 </head>
 <body>
   <h1>Designer Website Critique Rubric</h1>
+  <div class="student-field">
+    <label for="studentName">Student Name: </label>
+    <input type="text" id="studentName" name="studentName" placeholder="Enter name here...">
+  </div>
   <p>Click a number to select a rating. Click again to deselect. Only one cell per row may be selected.</p>
   <table id="rubric">
     <thead>
@@ -85,9 +98,12 @@
             const td = document.createElement('td');
             td.textContent = desc;
             td.addEventListener('click', () => {
-              const siblings = [...td.parentNode.children];
-              siblings.forEach(cell => cell.classList.remove('selected'));
-              if (!td.classList.contains('selected')) td.classList.add('selected');
+              if (td.classList.contains('selected')) {
+                td.classList.remove('selected');
+              } else {
+                [...td.parentNode.children].forEach(cell => cell.classList.remove('selected'));
+                td.classList.add('selected');
+              }
             });
             tr.appendChild(td);
           });
