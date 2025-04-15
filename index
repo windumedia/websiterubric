@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Designer Website Critique Rubric</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      table-layout: fixed;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    .criteria {
+      text-align: left;
+      background-color: #f9f9f9;
+      font-weight: bold;
+    }
+    .selected {
+      background-color: #a7e0c1 !important;
+    }
+  </style>
+</head>
+<body>
+  <h1>Designer Website Critique Rubric</h1>
+  <p>Click a number to select a rating. Click again to deselect. Only one cell per row may be selected.</p>
+  <table id="rubric">
+    <thead>
+      <tr>
+        <th>Criteria</th>
+        <th>1 - Poor</th>
+        <th>2 - Fair</th>
+        <th>3 - Good</th>
+        <th>4 - Very Good</th>
+        <th>5 - Excellent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <script>
+        const criteriaDescriptions = {
+          "Organization": ["Cluttered, confusing", "Some organization but scattered", "Generally organized", "Clear structure", "Highly organized, polished"],
+          "Intuitive Navigation": ["Hard to find anything", "Menu unclear or inconsistent", "Navigation mostly works", "Easy to use and learn", "Seamless, instinctive UX"],
+          "Legibility": ["Fonts hard to read", "Poor contrast or spacing", "Mostly legible", "Easy to read", "Exceptionally clear and readable"],
+          "Color Scheme": ["Clashing, unbalanced", "Distracting or dull", "Works but lacks harmony", "Well-coordinated", "Harmonious and enhances brand"],
+          "Typefaces": ["Inconsistent or unprofessional", "Limited style control", "Adequate and readable", "Stylish and readable", "Expertly chosen, enhances tone"],
+          "Project Choices": ["Projects feel irrelevant or weak", "Some relevance", "Decent selections", "Relevant and diverse", "Strong, relevant, and impressive"],
+          "Layout": ["Disorganized or chaotic", "Inconsistent spacing", "Clean but predictable", "Intentional and well-balanced", "Innovative, dynamic, and clear"],
+          "Composition": ["Visual imbalance", "Lacking focal points", "Balanced overall", "Visually engaging", "Strong hierarchy, dynamic flow"],
+          "Style Consistency": ["Incoherent, mixed styles", "Style not cohesive", "Mostly consistent", "Consistent and polished", "Unified and distinctive"],
+          "Alignment": ["Elements misaligned", "Occasional misalignment", "Mostly aligned", "Well-aligned with intention", "Perfect alignment and precision"],
+          "Site Architecture": ["Disconnected pages", "Disorganized structure", "Logical flow", "Smart, user-centric flow", "Elegant, scalable structure"],
+          "Case Study Presentation": ["Missing or unclear", "Vague or disjointed", "Clear overview, needs polish", "Informative and clear", "Deep, engaging storytelling"],
+          "Home Page": ["Lacks direction or hook", "Basic but uninspired", "Clear but generic", "Welcoming and informative", "Captivating and strategic"],
+          "About Page": ["Missing or impersonal", "Too brief or cluttered", "Personal but lacks voice", "Compelling and relatable", "Strong narrative, memorable"],
+          "Portfolio Page": ["Incomplete or unstructured", "Poor image quality or flow", "Functional but could be refined", "Easy to navigate and view", "Showcase-worthy, well-curated"]
+        };
+
+        const tbody = document.currentScript.parentElement;
+
+        for (const [criteria, descriptions] of Object.entries(criteriaDescriptions)) {
+          const tr = document.createElement('tr');
+          const tdLabel = document.createElement('td');
+          tdLabel.className = 'criteria';
+          tdLabel.textContent = criteria;
+          tr.appendChild(tdLabel);
+
+          descriptions.forEach((desc, i) => {
+            const td = document.createElement('td');
+            td.textContent = desc;
+            td.addEventListener('click', () => {
+              const siblings = [...td.parentNode.children];
+              siblings.forEach(cell => cell.classList.remove('selected'));
+              if (!td.classList.contains('selected')) td.classList.add('selected');
+            });
+            tr.appendChild(td);
+          });
+
+          tbody.appendChild(tr);
+        }
+      </script>
+    </tbody>
+  </table>
+</body>
+</html>
