@@ -13,8 +13,14 @@
       text-align: center;
     }
     .student-field {
-      margin: 20px 0;
-      text-align: center;
+      margin: 20px auto;
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .student-field label {
+      font-weight: bold;
     }
     .student-field input {
       padding: 10px;
@@ -33,6 +39,7 @@
       text-align: center;
       cursor: pointer;
       user-select: none;
+      vertical-align: middle;
     }
     th {
       background-color: #f4f4f4;
@@ -41,6 +48,7 @@
       text-align: left;
       background-color: #f9f9f9;
       font-weight: bold;
+      cursor: default;
     }
     .selected {
       background-color: #a7e0c1 !important;
@@ -50,19 +58,19 @@
 <body>
   <h1>Designer Website Critique Rubric</h1>
   <div class="student-field">
-    <label for="studentName">Student Name: </label>
+    <label for="studentName">Student Name:</label>
     <input type="text" id="studentName" name="studentName" placeholder="Enter name here...">
   </div>
   <p>Click a number to select a rating. Click again to deselect. Only one cell per row may be selected.</p>
   <table id="rubric">
     <thead>
       <tr>
-        <th>Criteria</th>
-        <th>1 - Poor</th>
-        <th>2 - Fair</th>
-        <th>3 - Good</th>
-        <th>4 - Very Good</th>
-        <th>5 - Excellent</th>
+        <th style="width: 20%">Criteria</th>
+        <th style="width: 16%">1 - Poor</th>
+        <th style="width: 16%">2 - Fair</th>
+        <th style="width: 16%">3 - Good</th>
+        <th style="width: 16%">4 - Very Good</th>
+        <th style="width: 16%">5 - Excellent</th>
       </tr>
     </thead>
     <tbody>
@@ -98,10 +106,11 @@
             const td = document.createElement('td');
             td.textContent = desc;
             td.addEventListener('click', () => {
+              const siblings = [...td.parentNode.children];
               if (td.classList.contains('selected')) {
                 td.classList.remove('selected');
               } else {
-                [...td.parentNode.children].forEach(cell => cell.classList.remove('selected'));
+                siblings.forEach(cell => cell.classList.remove('selected'));
                 td.classList.add('selected');
               }
             });
