@@ -29,6 +29,7 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
+      table-layout: fixed;
     }
     th, td {
       border: 1px solid #ccc;
@@ -37,6 +38,7 @@
       cursor: pointer;
       user-select: none;
       vertical-align: middle;
+      word-wrap: break-word;
     }
     th {
       background-color: #f4f4f4;
@@ -50,6 +52,8 @@
     .selected {
       background-color: #a7e0c1 !important;
     }
+    .rubric-col-criteria { width: 20%; }
+    .rubric-col-score { width: 16%; }
   </style>
 </head>
 <body>
@@ -62,12 +66,12 @@
   <table id="rubric">
     <thead>
       <tr>
-        <th>Criteria</th>
-        <th>1 - Poor</th>
-        <th>2 - Fair</th>
-        <th>3 - Good</th>
-        <th>4 - Very Good</th>
-        <th>5 - Excellent</th>
+        <th class="rubric-col-criteria">Criteria</th>
+        <th class="rubric-col-score">1 - Poor</th>
+        <th class="rubric-col-score">2 - Fair</th>
+        <th class="rubric-col-score">3 - Good</th>
+        <th class="rubric-col-score">4 - Very Good</th>
+        <th class="rubric-col-score">5 - Excellent</th>
       </tr>
     </thead>
     <tbody>
@@ -95,12 +99,13 @@
         for (const [criteria, descriptions] of Object.entries(criteriaDescriptions)) {
           const tr = document.createElement('tr');
           const tdLabel = document.createElement('td');
-          tdLabel.className = 'criteria';
+          tdLabel.className = 'criteria rubric-col-criteria';
           tdLabel.textContent = criteria;
           tr.appendChild(tdLabel);
 
           descriptions.forEach((desc) => {
             const td = document.createElement('td');
+            td.className = 'rubric-col-score';
             td.innerHTML = `<span title="${desc}">${desc}</span>`;
             td.addEventListener('click', () => {
               const siblings = [...td.parentNode.children].slice(1);
