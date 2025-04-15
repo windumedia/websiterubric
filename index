@@ -29,7 +29,6 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
-      table-layout: fixed;
     }
     th, td {
       border: 1px solid #ccc;
@@ -63,12 +62,12 @@
   <table id="rubric">
     <thead>
       <tr>
-        <th style="width: 20%">Criteria</th>
-        <th style="width: 16%">1 - Poor</th>
-        <th style="width: 16%">2 - Fair</th>
-        <th style="width: 16%">3 - Good</th>
-        <th style="width: 16%">4 - Very Good</th>
-        <th style="width: 16%">5 - Excellent</th>
+        <th>Criteria</th>
+        <th>1 - Poor</th>
+        <th>2 - Fair</th>
+        <th>3 - Good</th>
+        <th>4 - Very Good</th>
+        <th>5 - Excellent</th>
       </tr>
     </thead>
     <tbody>
@@ -100,9 +99,9 @@
           tdLabel.textContent = criteria;
           tr.appendChild(tdLabel);
 
-          descriptions.forEach((desc, i) => {
+          descriptions.forEach((desc) => {
             const td = document.createElement('td');
-            td.textContent = desc;
+            td.innerHTML = `<span title="${desc}">${desc}</span>`;
             td.addEventListener('click', () => {
               const siblings = [...td.parentNode.children].slice(1);
               if (td.classList.contains('selected')) {
